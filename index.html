@@ -56,9 +56,9 @@
       font-size: 4vw;
       cursor: pointer;
       transition: all 0.3s ease;
-      min-width: 100px;
-      max-width: 180px;
       user-select: none;
+      max-width: 90vw;
+      word-break: break-word;
     }
 
     button:active {
@@ -117,8 +117,6 @@
       max-width: 80vw;
       max-height: 50vh;
       border-radius: 12px;
-      user-select: none;
-      pointer-events: none;
     }
 
     #celebrateText {
@@ -140,8 +138,6 @@
       margin-bottom: 10px;
       display: none;
       z-index: 3;
-      user-select: none;
-      pointer-events: none;
     }
 
     p {
@@ -151,12 +147,7 @@
   </style>
 </head>
 <body>
-  <!-- Üstte görünen GIF -->
-  <img
-    id="topGif"
-    src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm9jejVqMDNpMTFuamd4bG9jd3VjZHczeDlpbGRsNXV6eXVvZWF3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hECJDGJs4hQjjWLqRV/giphy.gif"
-    alt="Üstteki GIF"
-  />
+  <img id="topGif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm9jejVqMDNpMTFuamd4bG9jd3VjZHczeDlpbGRsNXV6eXVvZWF3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hECJDGJs4hQjjWLqRV/giphy.gif" alt="Üstteki GIF" />
 
   <div class="heart" id="heart">❤️</div>
 
@@ -167,11 +158,7 @@
     <div class="message" id="message"></div>
   </div>
 
-  <img
-    id="finalGif"
-    src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZndieGoxZXBlYnZhOGo1dHB1NjZ6dnIzc2VmejgwMGVmcWMwaTFxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NfzERYyiWcXU4/giphy.gif"
-    alt="Affet Beni"
-  />
+  <img id="finalGif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZndieGoxZXBlYnZhOGo1dHB1NjZ6dnIzc2VmejgwMGVmcWMwaTFxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NfzERYyiWcXU4/giphy.gif" alt="Affet Beni" />
   <div id="celebrateText">OLEEEYYY SENİ ÇOK SEVİYORUMMM!!!</div>
 
   <script>
@@ -216,9 +203,7 @@
         heart.style.left = Math.random() * window.innerWidth + "px";
         heart.style.animationDuration = 2 + Math.random() * 2 + "s";
         document.body.appendChild(heart);
-        setTimeout(() => {
-          heart.remove();
-        }, 4000);
+        setTimeout(() => heart.remove(), 4000);
       }, 150);
       return interval;
     }
@@ -236,17 +221,15 @@
     noBtn.onclick = () => {
       noClickCount++;
 
-      if (noClickCount <= mesajlar.length) {
-        messageBox.innerText = mesajlar[noClickCount - 1];
-      } else {
-        messageBox.innerText = mesajlar[mesajlar.length - 1];
-      }
+      const msg = mesajlar[noClickCount - 1] || mesajlar[mesajlar.length - 1];
+      messageBox.innerText = msg;
 
-      // Yazı küçülsün, buton büyüsün
-      let newPadding = 3 + noClickCount * 3;
-      yesBtn.style.padding = newPadding + "vw " + (newPadding + 3) + "vw";
-      let newFontSize = Math.max(4 - noClickCount * 0.2, 2);
-      yesBtn.style.fontSize = newFontSize + "vw";
+      const maxWidth = 90; // en fazla %90 genişliğe kadar
+      const fontSize = Math.max(4 - noClickCount * 0.2, 2.5); // Min 2.5vw
+      const padding = Math.min(3 + noClickCount * 1.5, 10); // Maks 10vw
+
+      yesBtn.style.fontSize = fontSize + "vw";
+      yesBtn.style.padding = padding + "vw " + (padding + 2) + "vw";
     };
   </script>
 </body>
