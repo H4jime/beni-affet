@@ -21,8 +21,7 @@
     }
 
     .heart {
-      font-size: 20vw; /* Ekran genişliğinin %20'si */
-      max-font-size: 100px;
+      font-size: 20vw;
       animation: pulse 1s infinite;
       color: red;
       user-select: none;
@@ -30,15 +29,9 @@
     }
 
     @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.2);
-      }
-      100% {
-        transform: scale(1);
-      }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
     .box {
@@ -73,21 +66,11 @@
     }
 
     @keyframes shake {
-      0% {
-        transform: translateX(0);
-      }
-      25% {
-        transform: translateX(-5px);
-      }
-      50% {
-        transform: translateX(5px);
-      }
-      75% {
-        transform: translateX(-5px);
-      }
-      100% {
-        transform: translateX(0);
-      }
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
     }
 
     #yesBtn {
@@ -120,14 +103,8 @@
     }
 
     @keyframes fall {
-      0% {
-        top: -30px;
-        opacity: 1;
-      }
-      100% {
-        top: 100vh;
-        opacity: 0;
-      }
+      0% { top: -30px; opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
     }
 
     #finalGif {
@@ -158,7 +135,6 @@
       padding: 0 10px;
     }
 
-    /* Yeni eklenen GIF üstte, seçim kutusunun üstünde */
     #topGif {
       max-width: 80vw;
       margin-bottom: 10px;
@@ -175,7 +151,7 @@
   </style>
 </head>
 <body>
-  <!-- ÜSTTE GÖRÜNECEK GIF -->
+  <!-- Üstte görünen GIF -->
   <img
     id="topGif"
     src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm9jejVqMDNpMTFuamd4bG9jd3VjZHczeDlpbGRsNXV6eXVvZWF3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hECJDGJs4hQjjWLqRV/giphy.gif"
@@ -191,7 +167,6 @@
     <div class="message" id="message"></div>
   </div>
 
-  <!-- Final GIF ve Kutlama yazısı -->
   <img
     id="finalGif"
     src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZndieGoxZXBlYnZhOGo1dHB1NjZ6dnIzc2VmejgwMGVmcWMwaTFxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NfzERYyiWcXU4/giphy.gif"
@@ -208,7 +183,6 @@
     const celebrateText = document.getElementById("celebrateText");
     const topGif = document.getElementById("topGif");
 
-    // ↓↓↓ BU MESAJLARI KENDİN DEĞİŞTİREBİLİRSİN ↓↓↓
     const mesajlar = [
       "Ama... Lütfen?",
       "Yalvarırım...",
@@ -231,10 +205,9 @@
     setTimeout(() => {
       document.getElementById("heart").style.display = "none";
       document.getElementById("askBox").style.display = "block";
-      topGif.style.display = "block"; // GIF göster
+      topGif.style.display = "block";
     }, 2000);
 
-    // Kalp yağmuru başlat
     function startHeartRain() {
       const interval = setInterval(() => {
         const heart = document.createElement("div");
@@ -252,18 +225,10 @@
 
     yesBtn.onclick = () => {
       messageBox.innerText = "Seni çok seviyorum ❤️";
-
-      // Butonları gizle
       yesBtn.style.display = "none";
       noBtn.style.display = "none";
-
-      // Üstteki GIF gizle
       topGif.style.display = "none";
-
-      // Kalp yağmuru başlasın
       startHeartRain();
-
-      // GIF ve kutlama yazısını göster
       finalGif.style.display = "block";
       celebrateText.style.display = "block";
     };
@@ -277,11 +242,11 @@
         messageBox.innerText = mesajlar[mesajlar.length - 1];
       }
 
-      // "Evet" butonunu büyüt
-      let newSize = 4 + noClickCount * 4;
+      // Yazı küçülsün, buton büyüsün
       let newPadding = 3 + noClickCount * 3;
-      yesBtn.style.fontSize = newSize + "vw";
       yesBtn.style.padding = newPadding + "vw " + (newPadding + 3) + "vw";
+      let newFontSize = Math.max(4 - noClickCount * 0.2, 2);
+      yesBtn.style.fontSize = newFontSize + "vw";
     };
   </script>
 </body>
